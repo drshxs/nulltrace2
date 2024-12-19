@@ -1,0 +1,211 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: white;
+    font-family: 'Poppins', Arial, sans-serif; /* Updated to use Poppins */
+    font-size: 2rem;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+    position: relative;
+}
+
+#top-bar {
+    width: 100%;
+    height: 6%;
+    background-color: rgb(0, 0, 0);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: moveIn 1s ease-out;
+    border-bottom: 1px solid rgb(30,30,30);
+}
+
+#top-bar #button {
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 4px;
+    margin-top: 2px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#top-bar #button:hover {
+    background-color: white;
+    color: black;
+}
+
+#center-text {
+    text-align: center;
+    animation: fadeIn 2s ease-out 0.5s;
+    z-index: 1;
+    margin-top: -250px;
+}
+
+#center-image {
+    width: 900px;
+    height: auto;
+    opacity: 0;
+    margin-top: 50px;
+    animation: fadeIn 2s forwards 0.5s;
+    overflow: hidden;
+}
+
+#input-form {
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: rgba(16, 16, 16, 0.75);
+    border: 1px solid rgb(30,30,30);
+    border-radius: 8px;
+    color: white;
+    z-index: 5;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    backdrop-filter: blur(10px);
+}
+
+#input-form h5 {
+    margin: 0; 
+    padding: 0; 
+    font-size: 2rem;
+    color: white;
+    text-align: center; 
+    width: 100%;
+}
+
+#input-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.pair {
+    display: flex;
+    justify-content: flex-start; 
+    gap: 30px; 
+}
+
+.input-item {
+    width: 46.25%; 
+}
+
+.input-group label {
+    font-size: 1rem;
+    color: white;
+}
+
+#input-form .input-group input {
+    padding: 10px;
+    background-color: rgb(18, 18, 18);
+    color: white;
+    font-size: 1rem;
+    width: 95%;
+    border: none;
+    border-bottom: 2px solid rgb(160, 160, 160);
+    outline: none;
+    transition: border-bottom 0.3s ease;
+}
+
+#input-form .input-group input:focus {
+    border-bottom: 2px solid white;
+}
+
+#input-form button {
+    padding: 8px;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    border: 1px solid rgba(40, 40, 40, 1);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 10px;
+}
+
+#input-form button:hover {
+    background-color: white;
+    color: black;
+}
+
+#pastes-container {
+    width: 60%;
+    margin-top: 50px;
+}
+
+.pastes-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #1a1a1a;
+    color: white;
+    font-weight: semi-bold;
+    border: none;
+}
+
+.paste-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #333;
+    border: 1px solid #2a2a2a;
+    transition: background-color 0.3s;
+}
+
+.paste-bar:nth-child(even) {
+    background-color: #292929;
+}
+
+.paste-bar:nth-child(odd) {
+    background-color: #1e1e1e;
+}
+
+.paste-title {
+    font-size: .85rem;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.paste-date {
+    font-size: .85rem;
+    color: #fff;
+    margin-left: 20px;
+}
+
+.paste-name {
+    font-size: .85rem;
+    color: #fff;
+    margin-left: 70px; 
+}
+
+.paste-bar .paste-name {
+    font-size: .85rem;
+    color: #fff;
+    margin-left: 117px; 
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NullTrace - Register</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+            authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+            projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+            storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+            messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+            appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+            measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        const db = getFirestore();
+
+        document.getElementById('button').addEventListener('click', function() {
+            const username = document.getElementById('input1-reg').value;
+            const email = document.getElementById('input2-reg').value;
+            const password = document.getElementById('input3-reg').value;
+
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    setDoc(doc(db, "users", user.uid), {
+                        username: username,
+                        email: email
+                    })
+                    .then(() => {
+                        alert('User registered successfully!');
+                        window.location.href = "http://127.0.0.1:5500/public/wall.html";
+                    })
+                    .catch((error) => {
+                        console.error('Error saving user data to Firestore:', error);
+                    });
+                })
+                .catch((error) => {
+                    console.error('Error registering user:', error.message);
+                    alert('Registration failed!');
+                });
+        });
+    </script>
+</head>
+<body>
+    <div id="center-text">NullTrace</div>
+    <img id="center-image" src="../assets/null.png" alt="NullTrace">
+    <div id="panel">
+        <h5>Register</h5>
+        <input type="text" id="input1-reg" placeholder="Username">
+        <input type="email" id="input2-reg" placeholder="Email">
+        <input type="password" id="input3-reg" placeholder="Password">
+        <button id="button">Register</button>
+        <a href="http://127.0.0.1:5500/public/auth/login.html">Already have an account? Click Here</a>
+    </div>
+</body>
+</html>

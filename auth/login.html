@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NullTrace - Login</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+    
+        const firebaseConfig = {
+            apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+            authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+            projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+            storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+            messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+            appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+            measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+        };
+    
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+    
+        document.getElementById('button').addEventListener('click', function() {
+            const email = document.getElementById('input1').value;
+            const password = document.getElementById('input2').value;
+    
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    alert('Login successful!');
+                    window.location.href = 'http://127.0.0.1:5500/public/wall.html';
+                })
+                .catch((error) => {
+                    console.error('Error logging in:', error.message);
+                    alert('Failed to log in!');
+                });
+        });
+    
+        const resetAutofillStyles = () => {
+            const inputs = document.querySelectorAll('#panel input');
+            inputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    if (input.value !== '') {
+                        setTimeout(() => {
+                            input.style.borderBottom = '2px solid rgb(160, 160, 160)';
+                        }, 100);
+                    }
+                });
+            });
+        };
+    
+        window.addEventListener('load', resetAutofillStyles);
+    </script>
+</head>
+<body>
+    <div id="center-text">NullTrace</div>
+    <img id="center-image" src="../assets/null.png" alt="NullTrace">
+    <div id="panel">
+        <h5>Login</h5>
+        <input type="email" id="input1" placeholder="Email">
+        <input type="password" id="input2" placeholder="Password">
+        <button id="button">Login</button>
+        <a href="http://127.0.0.1:5500/public/auth/register.html">Don't have an account yet? Click Here</a>
+    </div>
+</body>
+</html>
